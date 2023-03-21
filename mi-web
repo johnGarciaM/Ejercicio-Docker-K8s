@@ -1,0 +1,13 @@
+server {
+       listen 81;
+       listen [::]:81;
+        
+       server_name mi-web.com www.mi-web.com;
+
+       root /var/www/mi-web/html;
+       index index.html;
+
+       location / {
+               try_files $uri $uri/ =404;
+       }
+}

@@ -1,0 +1,13 @@
+#! definimos el SO
+FROM ubuntu
+#! instalamos nginx para ubuntu
+RUN apt update && apt upgrade -y \
+    && apt install nginx -y
+#! el html local a la carpeta de nginx
+COPY ./index.html /var/www/mi-web/html/
+# ! configuración de nginx
+COPY ./mi-web /etc/nginx/sites-enabled/
+#! encender el servicio de nginx
+CMD service nginx start && tail -F /var/log/nginx/error.log
+#! exponer el puerto nginx 81
+EXPOSE 81

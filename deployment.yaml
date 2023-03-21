@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-nginx-01-deployment
+  namespace: default
+  labels:
+    app: ubuntu-nginx-01
+spec:
+  selector:
+    matchLabels:
+      app: ubuntu-nginx-01
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ubuntu-nginx-01
+    spec:
+      containers:
+        - name: ubuntu-nginx-01-container
+          image: localhost:5000/ubuntu-nginx-01:latest
+          ports:
+            - containerPort: 81
+          env:
+            - name: NGINX_PORT
+              value: "81"
+          resources:
+            requests:
+              cpu: 2m
+              memory: 30Mi
+            limits:
+              cpu: 2m
+              memory: 30Mi
